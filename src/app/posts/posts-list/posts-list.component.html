@@ -1,0 +1,7 @@
+<div *ngIf="postsList.length > 0;else postsEmpty">
+<h1>Posts List</h1>
+</div>
+
+<ng-container #postsEmpty > 
+    <h1>Sorry, No posts today</h1>
+</ng-container>

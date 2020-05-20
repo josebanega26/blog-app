@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { PostService } from "../post.service";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-post-create",
@@ -6,12 +8,21 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./post-create.component.scss"],
 })
 export class PostCreateComponent implements OnInit {
-  postText: string = "";
-  constructor() {}
+  postForm: FormGroup;
+  constructor(private postService: PostService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.postForm = new FormGroup({
+      title: new FormControl(null, [Validators.required]),
+      body: new FormControl(null, [Validators.required]),
+    });
+  }
 
   onSubmit() {
-    console.log("postText", this.postText);
+    this.postService.createPost({
+      tittle: "Hey",
+      body: "Cooool",
+    });
+    console.log("postText", this.postForm);
   }
 }

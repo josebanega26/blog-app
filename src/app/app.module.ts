@@ -5,7 +5,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { PostsComponent } from "./posts/posts.component";
 import { PostCreateComponent } from "./posts/post-create/post-create.component";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
 import { HeaderComponent } from "./header/header.component";
@@ -28,6 +28,7 @@ import { PostsListComponent } from "./posts/posts-list/posts-list.component";
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

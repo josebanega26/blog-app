@@ -13,4 +13,8 @@ export class PostService {
     this.postList.push(newPost);
     this.postsChanged.next(this.postList.slice());
   }
+
+  get getPosts() {
+    return [...this.postList];
+  }
 }

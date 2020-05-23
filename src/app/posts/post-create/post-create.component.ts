@@ -19,10 +19,7 @@ export class PostCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.postService.createPost({
-      tittle: "Hey",
-      body: "Cooool",
-    });
-    console.log("postText", this.postForm);
+    this.postService.createPost(this.postForm.value);
+    this.postForm.reset();
   }
 }

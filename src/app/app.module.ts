@@ -12,6 +12,7 @@ import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { LayoutComponent } from "./layout/layout.component";
 import { PostsListComponent } from "./posts/posts-list/posts-list.component";
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { PostsListComponent } from "./posts/posts-list/posts-list.component";
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

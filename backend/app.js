@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 const postRouter = require("./resources/posts/post.router");
+const MongoLib = require("./lib/mongo");
 
+console.log("MongoLib", new MongoLib());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -14,7 +19,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.use(express.json());
 app.use("/api/post", postRouter);
 
 app.use((req, res, next) => {

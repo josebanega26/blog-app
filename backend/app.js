@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const postRouter = require("./resources/posts/post.router");
 const MongoLib = require("./lib/mongo");
 
-console.log("MongoLib", new MongoLib());
+const mongoLib = new MongoLib();
+mongoLib.connect();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use((req, res, next) => {

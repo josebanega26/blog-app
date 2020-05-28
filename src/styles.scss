@@ -38,7 +38,7 @@ $blog-app-theme: mat-light-theme($blog-app-primary, $blog-app-accent, $blog-app-
     font-family: sans-serif;
     font-weight: bold;
     text-transform: uppercase;
-    background: #f97e76;
+    background: #221d23cc;
     color: #ffffff;
     text-align: center;
     width: 120px;
@@ -51,10 +51,24 @@ $blog-app-theme: mat-light-theme($blog-app-primary, $blog-app-accent, $blog-app-
 
     &:hover{
         text-decoration: none;
-        background: #F75145;
+        background: #221D23;
     }
     &:disabled{
         background-color: #C3C3C3;
+    }
+    &--secondary{
+        background: #235789ab;
+        &:hover{
+           background: #235789;
+        }
+    }
+    &--danger{
+        margin-left: 0.5rem;
+        background: #f97e76;
+        &:hover{
+            background: #F75145;
+        }
+
     }
 }
 html, body { height: 100%; }

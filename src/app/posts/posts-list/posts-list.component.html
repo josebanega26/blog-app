@@ -9,8 +9,10 @@
         </mat-expansion-panel-header>
         <p>{{ post.body }}</p>
         <mat-action-row>
-          <button class="btn">LIKE</button>
-          <button class="btn">SHARE</button>
+          <button class="btn btn--secondary">EDIT</button>
+          <button (click)="deletePost(post.id)" class="btn btn--danger">
+            DELETE
+          </button>
         </mat-action-row>
       </mat-expansion-panel>
     </mat-accordion>

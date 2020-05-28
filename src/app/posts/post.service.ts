@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Post } from "./post.interface";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 const API_URL = "http://localhost:3000";
 const POST_PATH = "/api/post";
 @Injectable({ providedIn: "root" })
@@ -11,12 +12,16 @@ export class PostService {
   postsChanged = new Subject<Post[]>();
 
   createPost(newPost: Post) {
-    console.log("newPost", newPost);
     this.http
-      .post<{ message: string }>(`${API_URL}${POST_PATH}`, newPost)
-      .subscribe((message) => {
+      .post<{ message: string; postId: string }>(
+        `${API_URL}${POST_PATH}`,
+        newPost
+      )
+      .subscribe(({ message, postId }) => {
+        const post = { ...newPost, id: postId };
         console.log("message", message);
-        this.postList.push(newPost);
+        console.log("post", post);
+        this.postList.push(post);
         this.postsChanged.next(this.postList.slice());
       });
   }
@@ -27,10 +32,33 @@ export class PostService {
 
   fetchPosts() {
     return this.http
-      .get<{ message: string; posts: Post[] }>(`${API_URL}${POST_PATH}`)
-      .subscribe(({ posts, message }) => {
+      .get<{ message: string; posts: any }>(`${API_URL}${POST_PATH}`)
+      .pipe(
+        map((postData) => {
+          return postData.posts.map((post) => {
+            return {
+              body: post.body,
+              title: post.title,
+              id: post._id,
+            };
+          });
+        })
+      )
+      .subscribe((posts) => {
+        console.log("posts", posts);
         this.postList = [...posts];
         this.postsChanged.next(posts);
+      });
+  }
+
+  deletePost(id: string) {
+    return this.http
+      .delete<{ id: string }>(`${API_URL}${POST_PATH}/${id}`)
+      .subscribe((message) => {
+        console.log("message", message);
+        const postList = this.postList.filter((post) => id !== post.id);
+        this.postsChanged.next(postList);
+        this.postList = [...postList];
       });
   }
 }

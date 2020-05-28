@@ -11,21 +11,47 @@ router
     // The tags are the some params that comes in the url after some ? ,
     const { tags = {} } = req.query;
     // const data = await productService.getProducts(tags);
-    const posts = await postService.getPosts(tags);
+    const posts = await postService.get(tags);
     console.log("New Posts", posts);
     res.status(200).send({
       msg: "posts fetched suceffuly",
       posts: posts,
     });
   })
-  .post((req, res, next) => {
+  .post(async (req, res, next) => {
     const { body, title } = req.body;
-    const post = new Post({ title, body });
-    console.log("post", post);
-    post.save();
+    const post = { title, body };
+    const postId = await postService.add(post);
+    console.log("postId", postId);
     res.status(201).json({
       message: "post added suceffuly",
+      postId,
     });
   });
 
+router
+  .route("/:id")
+  .get(async (req, res, next) => {
+    const { id } = req.params;
+    const post = await postService.getById(id);
+    res.status(200).json({
+      post: post,
+      message: "message sucessfully",
+    });
+  })
+  .put(async (req, res, next) => {
+    const { id } = req.params;
+    console.log("id", id);
+    res.status(200).json({
+      message: "post updated sucessfully",
+    });
+  })
+  .delete(async (req, res, next) => {
+    const { id } = req.params;
+    const postDeleted = await postService.delete(id);
+    console.log("postDeleted", postDeleted);
+    res.status(200).json({
+      message: "post delete sucessfully",
+    });
+  });
 module.exports = router;

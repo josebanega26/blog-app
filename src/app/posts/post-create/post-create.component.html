@@ -1,13 +1,8 @@
 <mat-card>
-  <form 
-  (ngSubmit)='onSubmit()'
-  [formGroup]="postForm"
-  >
+  <form (ngSubmit)="onSubmit()" [formGroup]="postForm">
     <div class="post__title-container">
       <label for="title">Title</label>
-      <input 
-      formControlName="title"
-      type="text" name="title">
+      <input formControlName="title" type="text" name="title" />
     </div>
     <div class="post__body-header"></div>
     <textarea
@@ -15,10 +10,8 @@
       class="post__body-area"
       rows="5"
     ></textarea>
-    <button 
-    
-    class="btn" 
-    [disabled]='!postForm.valid'
-    type="submit">Post</button>
+    <button class="btn" [disabled]="!postForm.valid" type="submit">
+      {{ editMode ? "Update" : "Post" }}
+    </button>
   </form>
 </mat-card>

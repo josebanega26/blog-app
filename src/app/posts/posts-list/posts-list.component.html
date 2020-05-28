@@ -9,7 +9,12 @@
         </mat-expansion-panel-header>
         <p>{{ post.body }}</p>
         <mat-action-row>
-          <button class="btn btn--secondary">EDIT</button>
+          <button
+            [routerLink]="['/post/edit', post.id]"
+            class="btn btn--secondary"
+          >
+            EDIT
+          </button>
           <button (click)="deletePost(post.id)" class="btn btn--danger">
             DELETE
           </button>

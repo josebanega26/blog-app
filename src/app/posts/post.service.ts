@@ -30,6 +30,11 @@ export class PostService {
     return [...this.postList];
   }
 
+  getPost(id) {
+    const post = { ...this.postList.find((post) => post.id === id) };
+    console.log("post", post);
+    return post;
+  }
   fetchPosts() {
     return this.http
       .get<{ message: string; posts: any }>(`${API_URL}${POST_PATH}`)
@@ -59,6 +64,14 @@ export class PostService {
         const postList = this.postList.filter((post) => id !== post.id);
         this.postsChanged.next(postList);
         this.postList = [...postList];
+      });
+  }
+
+  updatePost(id: string, post) {
+    return this.http
+      .put<{ id: string }>(`${API_URL}${POST_PATH}/${id}`, post)
+      .subscribe((message) => {
+        console.log("message", message);
       });
   }
 }

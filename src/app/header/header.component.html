@@ -1,3 +1,10 @@
 <header class="header">
+  <h2 [routerLink]="['/post']" routerLinkActive="router-link-active">
     Header
+  </h2>
+  <div>
+    <p [routerLink]="['/post/create']" routerLinkActive="router-link-active">
+      New Post
+    </p>
+  </div>
 </header>

@@ -12,7 +12,6 @@ router
     const { tags = {} } = req.query;
     // const data = await productService.getProducts(tags);
     const posts = await postService.get(tags);
-    console.log("New Posts", posts);
     res.status(200).send({
       msg: "posts fetched suceffuly",
       posts: posts,
@@ -22,7 +21,6 @@ router
     const { body, title } = req.body;
     const post = { title, body };
     const postId = await postService.add(post);
-    console.log("postId", postId);
     res.status(201).json({
       message: "post added suceffuly",
       postId,
@@ -41,15 +39,16 @@ router
   })
   .put(async (req, res, next) => {
     const { id } = req.params;
-    console.log("id", id);
+    const body = req.body;
+    const postUpdate = await postService.update(id, body);
     res.status(200).json({
       message: "post updated sucessfully",
+      post: postUpdate,
     });
   })
   .delete(async (req, res, next) => {
     const { id } = req.params;
     const postDeleted = await postService.delete(id);
-    console.log("postDeleted", postDeleted);
     res.status(200).json({
       message: "post delete sucessfully",
     });

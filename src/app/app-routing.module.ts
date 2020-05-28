@@ -1,15 +1,16 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { PostsComponent } from "./posts/posts.component";
 import { LayoutComponent } from "./layout/layout.component";
+
 const routes: Routes = [
   {
-    path: "**",
+    path: "",
     component: LayoutComponent,
     children: [
       {
-        path: "**",
-        component: PostsComponent,
+        path: "",
+        loadChildren: () =>
+          import("./posts/posts.module").then((m) => m.PostsModule),
       },
     ],
   },

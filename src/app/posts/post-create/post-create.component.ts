@@ -12,6 +12,7 @@ export class PostCreateComponent implements OnInit {
   postForm: FormGroup;
   editMode: boolean = false;
   id: string = null;
+  fileName: string = null;
   constructor(
     private postService: PostService,
     private router: ActivatedRoute,
@@ -22,6 +23,7 @@ export class PostCreateComponent implements OnInit {
     this.postForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       body: new FormControl(null, [Validators.required]),
+      image: new FormControl(null, []),
     });
 
     this.router.params.subscribe((params) => {
@@ -48,5 +50,12 @@ export class PostCreateComponent implements OnInit {
     }
     this.postForm.reset();
     this.route.navigate(["/post"]);
+  }
+
+  imageUploaded(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.postForm.patchValue({ image: file });
+    this.postForm.get("image").updateValueAndValidity();
+    this.fileName = file.name;
   }
 }

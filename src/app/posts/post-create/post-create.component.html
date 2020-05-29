@@ -4,6 +4,13 @@
       <label for="title">Title</label>
       <input formControlName="title" type="text" name="title" />
     </div>
+    <div class="post__image">
+      <button class="btn" (click)="inputImage.click()" type="button">
+        Add Image
+      </button>
+      <input type="file" #inputImage (change)="imageUploaded($event)" />
+      <p>{{ fileName }}</p>
+    </div>
     <div class="post__body-header"></div>
     <textarea
       formControlName="body"

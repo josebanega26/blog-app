@@ -12,6 +12,7 @@ export class PostCreateComponent implements OnInit {
   postForm: FormGroup;
   editMode: boolean = false;
   id: string = null;
+  imagePreview: string;
   fileName: string = null;
   constructor(
     private postService: PostService,
@@ -57,5 +58,11 @@ export class PostCreateComponent implements OnInit {
     this.postForm.patchValue({ image: file });
     this.postForm.get("image").updateValueAndValidity();
     this.fileName = file.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+      console.log("reader.result", reader.result);
+    };
+    reader.readAsDataURL(file);
   }
 }

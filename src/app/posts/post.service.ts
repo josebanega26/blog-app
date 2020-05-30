@@ -3,11 +3,12 @@ import { Post } from "./post.interface";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { SpinnerService } from "../spinner/spinner.service";
 const API_URL = "http://localhost:3000";
 const POST_PATH = "/api/post";
 @Injectable({ providedIn: "root" })
 export class PostService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private spinner: SpinnerService) {}
   postList: Post[] = [];
   postsChanged = new Subject<Post[]>();
 
@@ -36,6 +37,7 @@ export class PostService {
     return post;
   }
   fetchPosts() {
+    this.spinner.show();
     return this.http
       .get<{ message: string; posts: any }>(`${API_URL}${POST_PATH}`)
       .pipe(
@@ -50,7 +52,7 @@ export class PostService {
         })
       )
       .subscribe((posts) => {
-        console.log("posts", posts);
+        this.spinner.hide();
         this.postList = [...posts];
         this.postsChanged.next(posts);
       });

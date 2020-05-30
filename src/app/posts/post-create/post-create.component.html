@@ -11,6 +11,9 @@
       <input type="file" #inputImage (change)="imageUploaded($event)" />
       <p>{{ fileName }}</p>
     </div>
+    <div class="image_preview" *ngIf="imagePreview">
+      <img [src]="imagePreview" [alt]="imagePreview" />
+    </div>
     <div class="post__body-header"></div>
     <textarea
       formControlName="body"

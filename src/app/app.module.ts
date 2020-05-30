@@ -8,12 +8,14 @@ import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { LayoutComponent } from "./layout/layout.component";
 import { HttpClientModule } from "@angular/common/http";
+import { SpinnerComponent } from './spinner/spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     LayoutComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

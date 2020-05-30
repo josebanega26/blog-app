@@ -57,7 +57,13 @@ textarea {
     }
     padding-bottom: 0.50rem;
 }
-
+.image_preview{
+    margin-top: 1rem;
+    width: 180px;
+    img{
+        width: inherit;
+    }
+}
 input[type="file"]{
     visibility: hidden;
     width: 0;

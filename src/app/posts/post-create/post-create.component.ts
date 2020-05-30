@@ -1,19 +1,23 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { PostService } from "../post.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-
+import { imageType } from "./validator/image-type.validator";
+import { Subscription } from "rxjs";
 @Component({
   selector: "app-post-create",
   templateUrl: "./post-create.component.html",
   styleUrls: ["./post-create.component.scss"],
 })
-export class PostCreateComponent implements OnInit {
+export class PostCreateComponent implements OnInit, OnDestroy {
   postForm: FormGroup;
   editMode: boolean = false;
   id: string = null;
+  textSize: number = 140;
   imagePreview: string;
   fileName: string = null;
+
+  formSubscription: Subscription;
   constructor(
     private postService: PostService,
     private router: ActivatedRoute,
@@ -23,8 +27,15 @@ export class PostCreateComponent implements OnInit {
   ngOnInit(): void {
     this.postForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
-      body: new FormControl(null, [Validators.required]),
-      image: new FormControl(null, []),
+      body: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(140),
+      ]),
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [imageType],
+      }),
     });
 
     this.router.params.subscribe((params) => {
@@ -36,8 +47,11 @@ export class PostCreateComponent implements OnInit {
         this.setFormValue(post);
       }
     });
+    this.postForm.valueChanges.subscribe(({ body }) => {
+      this.textSize = 140 - (body as string).length;
+    });
   }
-
+  ngOnDestroy() {}
   setFormValue(post) {
     const { id, ...formPost } = post;
     this.postForm.setValue(formPost);
@@ -61,7 +75,6 @@ export class PostCreateComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result as string;
-      console.log("reader.result", reader.result);
     };
     reader.readAsDataURL(file);
   }

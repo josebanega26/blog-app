@@ -9,17 +9,19 @@
         Add Image
       </button>
       <input type="file" #inputImage (change)="imageUploaded($event)" />
-      <p>{{ fileName }}</p>
     </div>
-    <div class="image_preview" *ngIf="imagePreview">
+    <div
+      class="image_preview"
+      *ngIf="imagePreview !== '' && imagePreview && postForm.get('image').valid"
+    >
       <img [src]="imagePreview" [alt]="imagePreview" />
     </div>
     <div class="post__body-header"></div>
-    <textarea
-      formControlName="body"
-      class="post__body-area"
-      rows="5"
-    ></textarea>
+    <div class="post_body-container">
+      <textarea formControlName="body" class="post__body-area" rows="5">
+      </textarea>
+      <div>{{ textSize }}/140</div>
+    </div>
     <button class="btn" [disabled]="!postForm.valid" type="submit">
       {{ editMode ? "Update" : "Post" }}
     </button>

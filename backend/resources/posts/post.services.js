@@ -6,7 +6,6 @@ class PostService {
   async get(tags) {
     try {
       const posts = await Post.find(tags);
-      console.log("posts", posts);
       return posts;
     } catch (error) {
       console.log(error);
@@ -14,8 +13,7 @@ class PostService {
   }
   async getById(id) {
     try {
-      const post = await Post.findById(id);
-      console.log("post", post);
+      const post = await Post.findById({ _id: id });
       return post;
     } catch (error) {
       console.log("error", error);
@@ -24,25 +22,29 @@ class PostService {
   async delete(id) {
     try {
       const post = await Post.deleteOne({ _id: id });
-      console.log("post", post);
       return post;
     } catch (error) {
       console.log("error", error);
     }
   }
-  async update(id, post) {
+  async update(id, post, imagePath) {
+    const newPost = new Post({
+      _id: id,
+      imagePath: imagePath,
+      ...post,
+    });
     try {
-      const postUpdated = await Post.updateOne({ _id: id }, post);
+      const postUpdated = await Post.updateOne({ _id: id }, newPost);
       return postUpdated;
     } catch (error) {}
   }
   async add(postData) {
     const post = new Post(postData);
-    console.log("postId", post);
     return post
       .save()
-      .then(({ _id }) => {
-        return _id;
+      .then(({ _id, body, title, imagePath }) => {
+        console.log("imagePath", imagePath);
+        return { id: _id, body, title, imagePath };
       })
       .catch((err) => {
         console.log(err);

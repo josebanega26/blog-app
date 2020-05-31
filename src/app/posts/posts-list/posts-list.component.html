@@ -7,6 +7,13 @@
             {{ post.title }}
           </mat-panel-title>
         </mat-expansion-panel-header>
+        <div *ngIf="post.imagePath !== '' && post.imagePath">
+          <img
+            class="image_container"
+            [src]="post.imagePath"
+            [alt]="post.title"
+          />
+        </div>
         <p>{{ post.body }}</p>
         <mat-action-row>
           <button

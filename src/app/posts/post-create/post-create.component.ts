@@ -44,17 +44,23 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       this.editMode = this.id ? true : false;
       if (this.editMode) {
         const post = this.postService.getPost(this.id);
-        this.setFormValue(post);
+        post.subscribe((formValue) => {
+          this.setFormValue(formValue);
+        });
       }
     });
     this.postForm.valueChanges.subscribe(({ body }) => {
-      this.textSize = 140 - (body as string).length;
+      let bodyLength = body ? (body as string).length : 0;
+      if (bodyLength > 0) {
+        this.textSize = 140 - bodyLength;
+      }
     });
   }
   ngOnDestroy() {}
   setFormValue(post) {
-    const { id, ...formPost } = post;
-    this.postForm.setValue(formPost);
+    const { id, imagePath, body, title } = post;
+    this.postForm.setValue({ title, body, image: imagePath });
+    this.imagePreview = imagePath;
   }
 
   onSubmit() {

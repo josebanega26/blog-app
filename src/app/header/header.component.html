@@ -1,7 +1,11 @@
 <header class="header">
-  <h2 [routerLink]="['/post']" routerLinkActive="router-link-active">
-    Header
-  </h2>
+  <div
+    class="logo"
+    [routerLink]="['/post']"
+    routerLinkActive="router-link-active"
+  >
+    <img src="../../assets/images/blogLogo.png" alt="" />
+  </div>
   <div>
     <p [routerLink]="['/post/create']" routerLinkActive="router-link-active">
       New Post

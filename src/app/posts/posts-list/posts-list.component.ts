@@ -11,7 +11,7 @@ PageEvent;
 })
 export class PostsListComponent implements OnInit, OnDestroy {
   totalPost: number = 50;
-  postsPerPage: number = 5;
+  pageSize: number = 5;
   postsList: Post[] = [];
   postsSubscription: Subscription;
   constructor(private postService: PostService) {}

@@ -5,8 +5,18 @@ class PostService {
 
   async get(tags) {
     try {
-      const posts = await Post.find(tags);
-      return posts;
+      const { pageSize, currentPage } = tags;
+      const postCount = await Post.count();
+      // Find Posts
+      let posts;
+      if (pageSize && currentPage) {
+        posts = await Post.find()
+          .skip(parseInt(pageSize) * (parseInt(currentPage) - 1))
+          .limit(parseInt(pageSize));
+      } else {
+        posts = await Post.find();
+      }
+      return { posts, postCount };
     } catch (error) {
       console.log(error);
     }

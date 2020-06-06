@@ -26,12 +26,11 @@ router
   .route("/")
   .get(async (req, res, next) => {
     // The tags are the some params that comes in the url after some ? ,
-    const { tags = {} } = req.query;
-    // const data = await productService.getProducts(tags);
+    const tags = req.query;
     const posts = await postService.get(tags);
     res.status(200).send({
       msg: "posts fetched suceffuly",
-      posts: posts,
+      ...posts,
     });
   })
   .post(

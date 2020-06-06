@@ -95,14 +95,7 @@ export class PostService {
   }
   // DELETE
   deletePost(id: string) {
-    return this.http
-      .delete<{ id: string }>(`${API_URL}${POSTS_PATH}/${id}`)
-      .subscribe((message) => {
-        console.log("message", message);
-        const postList = this.postList.filter((post) => id !== post.id);
-        this.postsChanged.next(postList);
-        this.postList = [...postList];
-      });
+    return this.http.delete<{ id: string }>(`${API_URL}${POSTS_PATH}/${id}`);
   }
   // PUT
   updatePost(id: string, post: Post) {

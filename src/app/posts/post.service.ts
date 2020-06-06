@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Post } from "./post.interface";
 import { Subject } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { map, tap } from "rxjs/operators";
 import { SpinnerService } from "../spinner/spinner.service";
 const API_URL = "http://localhost:3000";
 const POSTS_PATH = "/api/post";
@@ -12,6 +12,7 @@ export class PostService {
   postList: Post[] = [];
   postsChanged = new Subject<Post[]>();
   postChanged = new Subject<Post>();
+  postCount = new Subject<number>();
   //POST
   createPost(newPost: Post) {
     const { body, title, image } = newPost;
@@ -25,7 +26,6 @@ export class PostService {
         formData
       )
       .subscribe(({ message, postAdded }) => {
-        console.log("postAdded", postAdded);
         this.postList.push(postAdded);
         this.postsChanged.next(this.postList.slice());
       });
@@ -61,11 +61,20 @@ export class PostService {
       });
   }
   // GET
-  fetchPosts() {
+  fetchPosts(pageSize = 4, currentPage = 1) {
+    const params = new HttpParams()
+      .set("pageSize", `${pageSize}`)
+      .set("currentPage", `${currentPage}`);
     this.spinner.show();
     return this.http
-      .get<{ message: string; posts: any }>(`${API_URL}${POSTS_PATH}`)
+      .get<{ message: string; posts: any; postCount: number }>(
+        `${API_URL}${POSTS_PATH}`,
+        { params: params }
+      )
       .pipe(
+        tap(({ postCount }) => {
+          this.postCount.next(postCount);
+        }),
         map((postData) => {
           return postData.posts.map((post) => {
             return {

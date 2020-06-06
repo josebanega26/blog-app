@@ -29,7 +29,7 @@ router
     const tags = req.query;
     const posts = await postService.get(tags);
     res.status(200).send({
-      msg: "posts fetched suceffuly",
+      message: "posts fetched suceffuly",
       ...posts,
     });
   })

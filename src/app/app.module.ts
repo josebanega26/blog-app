@@ -3,12 +3,13 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MaterialModule } from "./material/material.module";
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { LayoutComponent } from "./layout/layout.component";
 import { HttpClientModule } from "@angular/common/http";
-import { SpinnerComponent } from './spinner/spinner.component';
+import { SpinnerComponent } from "./spinner/spinner.component";
+import { MaterialModule } from "@material/material.module";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +22,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     HttpClientModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

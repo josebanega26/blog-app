@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const PostService = require("./post.services");
 const multer = require("multer");
-const postService = new PostService();
 const { MIME_TYPE } = require("../../utils/constanst");
+
+const postService = new PostService();
 
 // Config to get the Image and save in backend
 const storage = multer.diskStorage({

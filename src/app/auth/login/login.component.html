@@ -1,15 +1,37 @@
 <div class="login-container">
-  <div class="grid-item">
+  <div class="form-container grid-item">
     <mat-card>
-      <!-- TODO>: ADD to form -->
-      <form>
-        <!-- TODO: Make input component -->
-        <div class="post__title-container">
-          <label for="title">Title</label>
-          <input formControlName="title" type="text" name="title" />
-        </div>
-        <!-- TODO: add to button [disabled]="!postForm.valid" -->
-        <button class="btn" type="submit">
+      <div class="title">
+        <h2>ACCOUNT LOGIN</h2>
+      </div>
+      <form [formGroup]="loginForm">
+        <app-input
+          formControlName="email"
+          [error]="
+            !loginForm.get('email').valid && loginForm.get('email').touched
+          "
+          errorMsg="email is Required"
+          placeholder="JoeDoe@test.com"
+          label="Email"
+          type="text"
+        ></app-input>
+        <app-input
+          formControlName="password"
+          [error]="
+            !loginForm.get('password').valid &&
+            loginForm.get('password').touched
+          "
+          errorMsg="password is Required"
+          placeholder=""
+          label="Password"
+          type="password"
+        ></app-input>
+        <!-- TODO: add to button  -->
+        <button
+          class="btn btn--secondary btn--block"
+          [disabled]="!loginForm.valid"
+          type="submit"
+        >
           login
         </button>
       </form>

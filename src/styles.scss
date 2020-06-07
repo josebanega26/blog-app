@@ -53,9 +53,7 @@ $blog-app-theme: mat-light-theme($blog-app-primary, $blog-app-accent, $blog-app-
         text-decoration: none;
         background: #221D23;
     }
-    &:disabled{
-        background-color: #C3C3C3;
-    }
+   
     &--secondary{
         background: #235789ab;
         &:hover{
@@ -69,6 +67,13 @@ $blog-app-theme: mat-light-theme($blog-app-primary, $blog-app-accent, $blog-app-
             background: #F75145;
         }
 
+    }
+    &--block{
+        margin: 0;
+        width: 100%;
+    }
+     &:disabled{
+        background-color: #C3C3C3;
     }
 }
 html, body { height: 100%; }

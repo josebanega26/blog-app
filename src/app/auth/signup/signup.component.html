@@ -1,1 +1,43 @@
-<p>signup works!</p>
+<div class="signUp-container">
+  <div class="image-container grid-item">
+    <img src="../../../assets/images/signUp.svg" alt="" />
+  </div>
+  <div class="form-container grid-item">
+    <mat-card>
+      <div class="title">
+        <h2>SIGN UP</h2>
+      </div>
+      <form [formGroup]="signUpForm">
+        <app-input
+          formControlName="email"
+          [error]="
+            !signUpForm.get('email').valid && signUpForm.get('email').touched
+          "
+          errorMsg="email is Required"
+          placeholder="JoeDoe@test.com"
+          label="Email"
+          type="text"
+        ></app-input>
+        <app-input
+          formControlName="password"
+          [error]="
+            !signUpForm.get('password').valid &&
+            signUpForm.get('password').touched
+          "
+          errorMsg="password is Required"
+          placeholder=""
+          label="Password"
+          type="password"
+        ></app-input>
+        <!-- TODO: add to button  -->
+        <button
+          class="btn btn--primary btn--block"
+          [disabled]="!signUpForm.valid"
+          type="submit"
+        >
+          login
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</div>

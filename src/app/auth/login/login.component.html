@@ -6,14 +6,13 @@
       </div>
       <form [formGroup]="loginForm">
         <app-input
-          formControlName="username"
+          formControlName="email"
           [error]="
-            !loginForm.get('username').valid &&
-            loginForm.get('username').touched
+            !loginForm.get('email').valid && loginForm.get('email').touched
           "
-          errorMsg="username is Required"
-          placeholder="Joe Doe"
-          label="Username"
+          errorMsg="email is Required"
+          placeholder="JoeDoe@test.com"
+          label="Email"
           type="text"
         ></app-input>
         <app-input

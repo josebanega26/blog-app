@@ -69,6 +69,7 @@ $blog-app-theme: mat-light-theme($blog-app-primary, $blog-app-accent, $blog-app-
 
     }
     &--block{
+        margin: 0;
         width: 100%;
     }
      &:disabled{

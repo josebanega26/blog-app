@@ -6,7 +6,13 @@
   >
     <img src="../../assets/images/blogLogo.png" alt="" />
   </div>
-  <div>
+  <div class="link-row">
+    <p [routerLink]="['/']" routerLinkActive="router-link-active">
+      login
+    </p>
+    <p [routerLink]="['/sign-up']" routerLinkActive="router-link-active">
+      Sign up
+    </p>
     <p [routerLink]="['/post/create']" routerLinkActive="router-link-active">
       New Post
     </p>

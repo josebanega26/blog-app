@@ -1,0 +1,43 @@
+
+.signUp-container{
+    overflow: hidden;
+    background-color:  #2892D7;
+    height: calc(100vh - 120px);
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    .image-container{
+        width: 100%;
+        img{
+            width: inherit;
+        }
+    }
+    .title{
+        text-align: center;
+        font-weight: 600;
+        color: #2892D7;
+    }
+    .form-container{
+        width: 80%;
+    }
+        @media (max-width:780px) {
+        
+        padding: 10px 10px;
+        grid-template-columns: 1fr;
+        .image-container{
+            width: 80%;
+            justify-content: center;
+            display: flex;
+            img{
+                display: none;
+            }
+        }
+        .form-container{
+        width: 100%;
+        margin: 1rem 0;
+    }
+    }
+}

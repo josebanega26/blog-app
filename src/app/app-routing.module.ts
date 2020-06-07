@@ -10,7 +10,12 @@ const routes: Routes = [
       {
         path: "",
         loadChildren: () =>
-          import("./posts/posts.module").then((m) => m.PostsModule),
+          import("@auth/auth.module").then((m) => m.AuthModule),
+      },
+      {
+        path: "post",
+        loadChildren: () =>
+          import("@posts/posts.module").then((m) => m.PostsModule),
       },
     ],
   },

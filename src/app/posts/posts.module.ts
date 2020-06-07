@@ -6,6 +6,7 @@ import { PostsListComponent } from "./posts-list/posts-list.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MaterialModule } from "../material/material.module";
 import { PostsComponent } from "./posts.component";
+import { SharedModule } from "@shared/shared.module";
 
 @NgModule({
   declarations: [PostCreateComponent, PostsListComponent, PostsComponent],
@@ -15,6 +16,7 @@ import { PostsComponent } from "./posts.component";
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
+    SharedModule,
   ],
 })
 export class PostsModule {}

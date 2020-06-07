@@ -7,7 +7,7 @@
       <div class="title">
         <h2>SIGN UP</h2>
       </div>
-      <form [formGroup]="signUpForm">
+      <form [formGroup]="signUpForm" (submit)="submitForm()">
         <app-input
           formControlName="email"
           [error]="
@@ -24,7 +24,7 @@
             !signUpForm.get('password').valid &&
             signUpForm.get('password').touched
           "
-          errorMsg="password is Required"
+          errorMsg="Password between 4 and 8 characters"
           placeholder=""
           label="Password"
           type="password"

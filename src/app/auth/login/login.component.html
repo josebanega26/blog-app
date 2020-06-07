@@ -4,7 +4,7 @@
       <div class="title">
         <h2>ACCOUNT LOGIN</h2>
       </div>
-      <form [formGroup]="loginForm">
+      <form [formGroup]="loginForm" (submit)="submitForm()">
         <app-input
           formControlName="email"
           [error]="
@@ -13,7 +13,7 @@
           errorMsg="email is Required"
           placeholder="JoeDoe@test.com"
           label="Email"
-          type="text"
+          type="email"
         ></app-input>
         <app-input
           formControlName="password"
@@ -21,7 +21,7 @@
             !loginForm.get('password').valid &&
             loginForm.get('password').touched
           "
-          errorMsg="password is Required"
+          errorMsg="Password between 4 and 8 characters"
           placeholder=""
           label="Password"
           type="password"

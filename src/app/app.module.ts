@@ -9,6 +9,7 @@ import { LayoutComponent } from "./layout/layout.component";
 import { HttpClientModule } from "@angular/common/http";
 import { SpinnerComponent } from "./spinner/spinner.component";
 import { MaterialModule } from "@material/material.module";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MaterialModule } from "@material/material.module";
     FooterComponent,
     LayoutComponent,
     SpinnerComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

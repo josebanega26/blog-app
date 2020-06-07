@@ -1,2 +1,21 @@
-<img src="../../../assets/images/login.svg" alt="" />
-<p>login works!</p>
+<div class="login-container">
+  <div class="grid-item">
+    <mat-card>
+      <!-- TODO>: ADD to form -->
+      <form>
+        <!-- TODO: Make input component -->
+        <div class="post__title-container">
+          <label for="title">Title</label>
+          <input formControlName="title" type="text" name="title" />
+        </div>
+        <!-- TODO: add to button [disabled]="!postForm.valid" -->
+        <button class="btn" type="submit">
+          login
+        </button>
+      </form>
+    </mat-card>
+  </div>
+  <div class="image-container grid-item">
+    <img src="../../../assets/images/Login.svg" alt="" />
+  </div>
+</div>

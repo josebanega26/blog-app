@@ -1,0 +1,14 @@
+<div class="form__group" [ngClass]="{ error: error }">
+  <label>{{ label }}</label>
+  <div>
+    <input
+      [value]="value"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [type]="type"
+      class="ma-input"
+      (input)="onInput($event)"
+    />
+  </div>
+  <small *ngIf="error">{{ errorMsg }}</small>
+</div>

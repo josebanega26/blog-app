@@ -1,0 +1,23 @@
+.form__group{
+    label{
+        display: block;
+        padding: 0.25rem;
+        font-size: 0.95rem;
+        
+    }
+    input{
+    line-height: 2;
+    width: 50%;
+    border: none;
+    border-bottom:2px solid #2e3641;
+    box-sizing: border-box;
+    padding: .5rem;
+        &:focus {
+            outline: none
+        }
+    }
+    small{
+        color: red;
+    }
+    padding-bottom: 0.50rem;
+}

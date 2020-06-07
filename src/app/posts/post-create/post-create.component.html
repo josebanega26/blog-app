@@ -1,9 +1,17 @@
 <mat-card>
   <form (ngSubmit)="onSubmit()" [formGroup]="postForm">
-    <div class="post__title-container">
+    <!-- <div class="post__title-container">
       <label for="title">Title</label>
       <input formControlName="title" type="text" name="title" />
-    </div>
+    </div> -->
+    <app-input
+      formControlName="title"
+      [error]="!postForm.get('title').valid && postForm.get('title').touched"
+      errorMsg="Title is Required"
+      placeholder="another place holder"
+      label="Title"
+      type="text"
+    ></app-input>
     <div class="post__image">
       <button class="btn" (click)="inputImage.click()" type="button">
         Add Image

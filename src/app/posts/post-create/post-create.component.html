@@ -1,9 +1,5 @@
 <mat-card>
   <form (ngSubmit)="onSubmit()" [formGroup]="postForm">
-    <!-- <div class="post__title-container">
-      <label for="title">Title</label>
-      <input formControlName="title" type="text" name="title" />
-    </div> -->
     <app-input
       formControlName="title"
       [error]="!postForm.get('title').valid && postForm.get('title').touched"

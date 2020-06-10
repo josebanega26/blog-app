@@ -1,6 +1,8 @@
 const User = require("./user.model");
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
+const { config } = require("../../config");
+const { secret } = config;
 class UserService {
   constructor() {}
 
@@ -22,7 +24,38 @@ class UserService {
     });
   }
 
-  async LoginUser() {}
+  async loginUser(email, password) {
+    let user = await User.findOne({ email });
+    if (!user) {
+      return {
+        message: "User don't exist",
+        status: 404,
+      };
+    }
+    try {
+      let matchPassword = await bcrypt.compare(password, user.password);
+      if (!matchPassword) {
+        return {
+          message: "Auth Failed, Password don't match",
+          status: 401,
+        };
+      }
+      //Token last 1 hr
+      const jwtFirm = { email: user.email, id: user._id };
+      const token = jwt.sign(jwtFirm, secret, { expiresIn: "1h" });
+
+      return {
+        status: 200,
+        token,
+      };
+    } catch (error) {
+      return {
+        message: "Auth Failed",
+        status: 401,
+      };
+    }
+    console.log("user");
+  }
 }
 
 module.exports = UserService;

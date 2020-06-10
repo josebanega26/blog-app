@@ -16,7 +16,6 @@ router.route("/signup").post(async (req, res, next) => {
   userService
     .createUser(email, password)
     .then((result) => {
-      console.log("result", result);
       res.status(200).json({
         message: result,
         error: "",

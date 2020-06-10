@@ -3,7 +3,7 @@ const router = express.Router();
 const PostService = require("./post.services");
 const multer = require("multer");
 const { MIME_TYPE } = require("../../utils/constanst");
-
+const verifyAuth = require("../../utils/middlewares/verifyAuth");
 const postService = new PostService();
 
 // Config to get the Image and save in backend
@@ -35,10 +35,12 @@ router
     });
   })
   .post(
+    verifyAuth,
     multer({ storage: storage }).single("image"),
     async (req, res, next) => {
       const url = req.protocol + "://" + req.get("host");
       const imagePath = url + "/images/" + req.file.filename;
+      console.log("imagePath", imagePath);
       const { body, title } = req.body;
       const post = {
         title,
@@ -63,21 +65,25 @@ router
       message: "message sucessfully",
     });
   })
-  .put(multer({ storage: storage }).single("image"), async (req, res, next) => {
-    let imagePath = req.body.imagePath;
-    if (req.file) {
-      const url = req.protocol + "://" + req.get("host");
-      imagePath = url + "/images/" + req.file.filename;
+  .put(
+    verifyAuth,
+    multer({ storage: storage }).single("image"),
+    async (req, res, next) => {
+      let imagePath = req.body.imagePath;
+      if (req.file) {
+        const url = req.protocol + "://" + req.get("host");
+        imagePath = url + "/images/" + req.file.filename;
+      }
+      const { id } = req.params;
+      const body = req.body;
+      const postUpdate = await postService.update(id, body, imagePath);
+      res.status(200).json({
+        message: "post updated sucessfully",
+        post: postUpdate,
+      });
     }
-    const { id } = req.params;
-    const body = req.body;
-    const postUpdate = await postService.update(id, body, imagePath);
-    res.status(200).json({
-      message: "post updated sucessfully",
-      post: postUpdate,
-    });
-  })
-  .delete(async (req, res, next) => {
+  )
+  .delete(verifyAuth, async (req, res, next) => {
     const { id } = req.params;
     const postDeleted = await postService.delete(id);
     res.status(200).json({

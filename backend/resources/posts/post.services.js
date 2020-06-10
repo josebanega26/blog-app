@@ -6,7 +6,7 @@ class PostService {
   async get(tags) {
     try {
       const { pageSize, currentPage } = tags;
-      const postCount = await Post.count();
+      const postCount = await Post.countDocuments();
       // Find Posts
       let posts;
       if (pageSize && currentPage) {
@@ -53,7 +53,6 @@ class PostService {
     return post
       .save()
       .then(({ _id, body, title, imagePath }) => {
-        console.log("imagePath", imagePath);
         return { id: _id, body, title, imagePath };
       })
       .catch((err) => {

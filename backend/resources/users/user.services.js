@@ -54,7 +54,6 @@ class UserService {
         status: 401,
       };
     }
-    console.log("user");
   }
 }
 

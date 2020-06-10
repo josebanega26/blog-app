@@ -40,7 +40,6 @@ export class PostCreateComponent implements OnInit, OnDestroy {
 
     this.router.params.subscribe((params) => {
       this.id = params["id"];
-      console.log("params", params["id"]);
       this.editMode = this.id ? true : false;
       if (this.editMode) {
         const post = this.postService.getPost(this.id);

@@ -13,6 +13,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
   totalPost: number = 0;
   pageSize: number = 4;
   postsList: Post[] = [];
+  currentPage: number = 1;
   postsSubscription: Subscription;
   constructor(private postService: PostService) {}
   ngOnInit() {
@@ -30,8 +31,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
     this.postsSubscription.unsubscribe();
   }
   deletePost(id) {
-    console.log("Delete id", id);
     this.postService.deletePost(id).subscribe((message) => {
+      this.postService.fetchPosts(this.pageSize, this.currentPage);
       this.getPosts();
     });
   }
@@ -43,8 +44,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
   onChangedPage(pageData: PageEvent) {
     const { pageIndex, pageSize } = pageData;
     const currentPage = pageIndex + 1;
-    console.log(pageIndex + 1);
-    console.log(pageSize);
-    this.postService.fetchPosts(pageSize, currentPage);
+    this.pageSize = pageSize;
+    this.currentPage = currentPage;
+    this.postService.fetchPosts(this.pageSize, this.currentPage);
   }
 }

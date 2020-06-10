@@ -6,10 +6,12 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { LayoutComponent } from "./layout/layout.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { SpinnerComponent } from "./spinner/spinner.component";
 import { MaterialModule } from "@material/material.module";
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from "./not-found/not-found.component";
+import { CoreModule } from "./core/core.module";
+import { AuthInterceptor } from "./auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -26,8 +28,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
+    CoreModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

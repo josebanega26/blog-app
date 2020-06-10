@@ -56,7 +56,6 @@ export class PostService {
         })
       )
       .subscribe((post) => {
-        console.log("post", post);
         this.spinner.hide();
         this.postChanged.next(post);
       });
@@ -88,7 +87,6 @@ export class PostService {
         })
       )
       .subscribe((posts) => {
-        console.log("posts", posts);
         this.spinner.hide();
         this.postList = [...posts];
         this.postsChanged.next(posts);
@@ -116,8 +114,6 @@ export class PostService {
     }
     return this.http
       .put<{ id: string }>(`${API_URL}${POSTS_PATH}/${id}`, postData)
-      .subscribe((message) => {
-        console.log("message", message);
-      });
+      .subscribe((message) => {});
   }
 }

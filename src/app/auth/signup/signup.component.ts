@@ -26,9 +26,6 @@ export class SignupComponent implements OnInit {
   }
 
   submitForm() {
-    console.log("this.signUpForm", this.signUpForm.value);
-    this.authService
-      .signUp(this.signUpForm.value)
-      .subscribe((v) => console.log(v));
+    this.authService.signUp(this.signUpForm.value);
   }
 }

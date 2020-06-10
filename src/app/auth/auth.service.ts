@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { TokenService } from "../core/services/token.service";
 
 export interface IUser {
   email: string;
@@ -8,15 +9,17 @@ export interface IUser {
 }
 @Injectable({ providedIn: "root" })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   login(user: IUser) {
-    console.log("login", user);
-    return this.http.post(`${environment.apiUrlUser}/login`, user);
+    return this.http
+      .post<{ token: string }>(`${environment.apiUrlUser}/login`, user)
+      .subscribe(({ token }) => {
+        this.tokenService.setToken(token);
+      });
   }
 
   signUp(user: IUser) {
-    console.log("Sign up", user);
     return this.http.post(`${environment.apiUrlUser}/signup`, user);
   }
 }

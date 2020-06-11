@@ -17,7 +17,12 @@ export class TokenService {
   getToken() {
     return this.token;
   }
-
+  getIsAuth() {
+    if (this.token) {
+      return true;
+    }
+    return false;
+  }
   userState(state: boolean) {
     this.authStatus.next(state);
   }

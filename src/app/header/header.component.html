@@ -9,6 +9,7 @@
   </button>
   <div class="link-row">
     <button
+      *ngIf="!userIsConnect"
       mat-button
       color="primary"
       [routerLink]="['/']"
@@ -17,6 +18,7 @@
       login
     </button>
     <button
+      *ngIf="!userIsConnect"
       mat-button
       color="primary"
       [routerLink]="['/sign-up']"
@@ -26,12 +28,21 @@
     </button>
     <button
       *ngIf="userIsConnect"
-      mat-mini-fab
+      mat-button
+      (click)="logout()"
+      color="primary"
+      routerLinkActive="router-link-active"
+    >
+      Logout
+    </button>
+    <button
+      *ngIf="userIsConnect"
+      mat-button
       color="warn"
       [routerLink]="['/post/create']"
       routerLinkActive="router-link-active"
     >
-      +
+      new post
     </button>
   </div>
 </header>

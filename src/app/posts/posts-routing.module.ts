@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { PostsListComponent } from "./posts-list/posts-list.component";
 import { PostCreateComponent } from "./post-create/post-create.component";
 import { PostsComponent } from "./posts.component";
+import { AuthGuard } from "../guard/auth-guard.guard";
 
 const routes: Routes = [
   {
@@ -16,10 +17,12 @@ const routes: Routes = [
       {
         path: "create",
         component: PostCreateComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: "edit/:id",
         component: PostCreateComponent,
+        canActivate: [AuthGuard],
       },
     ],
   },
@@ -28,5 +31,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [AuthGuard],
 })
 export class PostsRoutingModule {}

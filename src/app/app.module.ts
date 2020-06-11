@@ -12,6 +12,7 @@ import { MaterialModule } from "@material/material.module";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { CoreModule } from "./core/core.module";
 import { AuthInterceptor } from "./auth.interceptor";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AuthInterceptor } from "./auth.interceptor";
     HttpClientModule,
     MaterialModule,
     CoreModule,
+    MatButtonModule,
   ],
   providers: [
     {

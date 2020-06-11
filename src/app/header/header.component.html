@@ -1,20 +1,37 @@
 <header class="header">
-  <div
+  <button
     class="logo"
+    mat-icon-button
     [routerLink]="['/post']"
     routerLinkActive="router-link-active"
   >
     <img src="../../assets/images/blogLogo.png" alt="" />
-  </div>
+  </button>
   <div class="link-row">
-    <p [routerLink]="['/']" routerLinkActive="router-link-active">
+    <button
+      mat-button
+      color="primary"
+      [routerLink]="['/']"
+      routerLinkActive="router-link-active"
+    >
       login
-    </p>
-    <p [routerLink]="['/sign-up']" routerLinkActive="router-link-active">
+    </button>
+    <button
+      mat-button
+      color="primary"
+      [routerLink]="['/sign-up']"
+      routerLinkActive="router-link-active"
+    >
       Sign up
-    </p>
-    <p [routerLink]="['/post/create']" routerLinkActive="router-link-active">
-      New Post
-    </p>
+    </button>
+    <button
+      *ngIf="userIsConnect"
+      mat-mini-fab
+      color="warn"
+      [routerLink]="['/post/create']"
+      routerLinkActive="router-link-active"
+    >
+      +
+    </button>
   </div>
 </header>

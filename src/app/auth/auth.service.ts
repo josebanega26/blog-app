@@ -16,6 +16,7 @@ export class AuthService {
       .post<{ token: string }>(`${environment.apiUrlUser}/login`, user)
       .subscribe(({ token }) => {
         this.tokenService.setToken(token);
+        this.tokenService.userState(true);
       });
   }
 

@@ -15,7 +15,7 @@
           />
         </div>
         <p>{{ post.body }}</p>
-        <mat-action-row>
+        <mat-action-row *ngIf="userAuth">
           <button
             [routerLink]="['/post/edit', post.id]"
             class="btn btn--secondary"

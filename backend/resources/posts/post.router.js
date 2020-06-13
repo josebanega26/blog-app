@@ -40,12 +40,13 @@ router
     async (req, res, next) => {
       const url = req.protocol + "://" + req.get("host");
       const imagePath = url + "/images/" + req.file.filename;
-      console.log("imagePath", imagePath);
+      console.log("userdata", req);
       const { body, title } = req.body;
       const post = {
         title,
         body,
         imagePath: imagePath,
+        creator: req.userData.userId,
       };
       const postAdded = await postService.add(post);
       res.status(201).json({
@@ -75,19 +76,22 @@ router
         imagePath = url + "/images/" + req.file.filename;
       }
       const { id } = req.params;
-      const body = req.body;
+      const body = { ...req.body, creator: req.userData.userId };
       const postUpdate = await postService.update(id, body, imagePath);
-      res.status(200).json({
-        message: "post updated sucessfully",
-        post: postUpdate,
+      const { status, ...message } = postUpdate;
+      res.status(status).json({
+        message,
       });
     }
   )
   .delete(verifyAuth, async (req, res, next) => {
     const { id } = req.params;
-    const postDeleted = await postService.delete(id);
-    res.status(200).json({
-      message: "post delete sucessfully",
+    console.log("userdata", req.userData);
+    const userId = req.userData.userId;
+    const postDeleted = await postService.delete(id, userId);
+    const { status, ...message } = postDeleted;
+    res.status(status).json({
+      ...message,
     });
   });
 module.exports = router;

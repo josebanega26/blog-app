@@ -4,7 +4,8 @@ const { config } = require("../../config");
 const verifyAuth = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    jwt.verify(token, config.secret);
+    const decodedCode = jwt.verify(token, config.secret);
+    req.userData = { email: decodedCode.email, userId: decodedCode.id };
     next();
   } catch (err) {
     console.log(err);

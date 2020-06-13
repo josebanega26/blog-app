@@ -48,6 +48,7 @@ class UserService {
         status: 200,
         token,
         expiresIn: 3600,
+        userId: user._id,
       };
     } catch (error) {
       return {

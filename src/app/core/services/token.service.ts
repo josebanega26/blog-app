@@ -6,6 +6,7 @@ import { Subject } from "rxjs";
 })
 export class TokenService {
   private token: string;
+  private userId: string;
   authStatus = new Subject<boolean>();
 
   constructor() {}
@@ -47,5 +48,13 @@ export class TokenService {
       return true;
     }
     return false;
+  }
+
+  setUserId(userId) {
+    this.userId = userId;
+  }
+
+  getUserId() {
+    return this.userId;
   }
 }

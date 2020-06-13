@@ -29,23 +29,50 @@ class PostService {
       console.log("error", error);
     }
   }
-  async delete(id) {
+  async delete(id, userId) {
     try {
-      const post = await Post.deleteOne({ _id: id });
-      return post;
+      const post = await Post.deleteOne({ _id: id, creator: userId });
+      const { deletedCount } = post;
+      if (deletedCount > 0) {
+        return {
+          status: 200,
+          message: "Post deleted successfully",
+        };
+      } else {
+        return {
+          status: 401,
+          message: "user is not authorized to delete the post",
+        };
+      }
     } catch (error) {
       console.log("error", error);
     }
   }
   async update(id, post, imagePath) {
+    console.log("post", post);
     const newPost = new Post({
       _id: id,
       imagePath: imagePath,
       ...post,
     });
     try {
-      const postUpdated = await Post.updateOne({ _id: id }, newPost);
-      return postUpdated;
+      const postUpdated = await Post.updateOne(
+        { _id: id, creator: post.creator },
+        newPost
+      );
+      console.log("postUpdated", postUpdated);
+      const { nModified } = postUpdated;
+      if (nModified > 0) {
+        return {
+          status: 200,
+          message: "Post update successfully",
+        };
+      } else {
+        return {
+          status: 401,
+          message: "user is not authorized to modify the post",
+        };
+      }
     } catch (error) {}
   }
   async add(postData) {

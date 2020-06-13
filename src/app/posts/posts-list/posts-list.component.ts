@@ -4,6 +4,7 @@ import { Post } from "../post.interface";
 import { Subscription } from "rxjs";
 import { PageEvent } from "@angular/material/paginator";
 import { distinctUntilChanged } from "rxjs/operators";
+import { TokenService } from "src/app/core/services/token.service";
 @Component({
   selector: "app-posts-list",
   templateUrl: "./posts-list.component.html",
@@ -14,15 +15,26 @@ export class PostsListComponent implements OnInit, OnDestroy {
   pageSize: number = 4;
   postsList: Post[] = [];
   currentPage: number = 1;
+  userId: string;
+  userAuth;
   postsSubscription: Subscription;
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private tokenService: TokenService
+  ) {}
   ngOnInit() {
     this.getPosts();
+    this.userId = this.tokenService.getUserId();
     this.postsSubscription = this.postService.postsChanged.subscribe(
       (posts: Post[]) => {
         this.postsList = posts;
       }
     );
+    this.userAuth = this.tokenService.getIsAuth();
+    console.log("this.userAuth", this.userAuth);
+    this.tokenService.authStatus.subscribe((userIsAuth) => {
+      console.log("userIsAuth", userIsAuth);
+    });
     this.postService.postCount
       .pipe(distinctUntilChanged())
       .subscribe((postCount) => (this.totalPost = postCount));

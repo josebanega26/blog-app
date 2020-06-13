@@ -52,6 +52,7 @@ export class PostService {
             body: post.body,
             imagePath: post.imagePath,
             id: post._id,
+            creator: post.creator,
           };
         })
       )
@@ -76,12 +77,14 @@ export class PostService {
           this.postCount.next(postCount);
         }),
         map((postData) => {
+          console.log("postData", postData);
           return postData.posts.map((post) => {
             return {
               title: post.title,
               body: post.body,
               imagePath: post.imagePath,
               id: post._id,
+              creator: post.creator,
             };
           });
         })
@@ -98,7 +101,7 @@ export class PostService {
   }
   // PUT
   updatePost(id: string, post: Post) {
-    const { body, title, image } = post;
+    const { body, title, image, creator } = post;
     let postData;
     if (typeof image === "object") {
       postData = new FormData();

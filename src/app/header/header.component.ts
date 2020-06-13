@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { TokenService } from "../core/services/token.service";
-import { Router } from "@angular/router";
-
+import { AuthService } from "@auth/auth.service";
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
@@ -9,17 +8,17 @@ import { Router } from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
   userIsConnect;
-  constructor(private tokenService: TokenService, private route: Router) {}
+  constructor(private tokenService: TokenService, private auth: AuthService) {}
 
   ngOnInit(): void {
+    this.userIsConnect = this.tokenService.getIsAuth();
     this.tokenService.authStatus.subscribe((state) => {
+      console.log("state HEEEEY", state);
       this.userIsConnect = state;
     });
   }
 
   logout() {
-    this.tokenService.setToken(null);
-    this.tokenService.authStatus.next(false);
-    this.route.navigate(["/"]);
+    this.auth.logout();
   }
 }

@@ -47,6 +47,7 @@ class UserService {
       return {
         status: 200,
         token,
+        expiresIn: 3600,
       };
     } catch (error) {
       return {

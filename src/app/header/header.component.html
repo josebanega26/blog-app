@@ -12,10 +12,19 @@
       *ngIf="!userIsConnect"
       mat-button
       color="primary"
+      [routerLink]="['/post']"
+      routerLinkActive="router-link-active"
+    >
+      Timeline
+    </button>
+    <button
+      *ngIf="!userIsConnect"
+      mat-button
+      color="primary"
       [routerLink]="['/']"
       routerLinkActive="router-link-active"
     >
-      login
+      Login
     </button>
     <button
       *ngIf="!userIsConnect"
@@ -42,7 +51,7 @@
       [routerLink]="['/post/create']"
       routerLinkActive="router-link-active"
     >
-      new post
+      New post
     </button>
   </div>
 </header>

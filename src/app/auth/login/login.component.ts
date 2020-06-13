@@ -11,7 +11,7 @@ import { AuthService } from "@auth/auth.service";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private route: Router, private auth: AuthService) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
     this.setForm();

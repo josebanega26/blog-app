@@ -17,17 +17,13 @@ class PostService {
         posts = await Post.find();
       }
       return { posts, postCount };
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
   async getById(id) {
     try {
       const post = await Post.findById({ _id: id });
       return post;
-    } catch (error) {
-      console.log("error", error);
-    }
+    } catch (error) {}
   }
   async delete(id, userId) {
     try {
@@ -44,12 +40,9 @@ class PostService {
           message: "user is not authorized to delete the post",
         };
       }
-    } catch (error) {
-      console.log("error", error);
-    }
+    } catch (error) {}
   }
   async update(id, post, imagePath) {
-    console.log("post", post);
     const newPost = new Post({
       _id: id,
       imagePath: imagePath,
@@ -60,7 +53,6 @@ class PostService {
         { _id: id, creator: post.creator },
         newPost
       );
-      console.log("postUpdated", postUpdated);
       const { nModified } = postUpdated;
       if (nModified > 0) {
         return {
@@ -82,9 +74,7 @@ class PostService {
       .then(({ _id, body, title, imagePath }) => {
         return { id: _id, body, title, imagePath };
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }
 }
 

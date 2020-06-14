@@ -23,7 +23,6 @@ router.route("/signup").post(async (req, res, next) => {
     })
     .catch((err) => {
       const { error } = err;
-      console.log("error", err);
       res.status(409).json({
         message: err.errors.email.message,
       });

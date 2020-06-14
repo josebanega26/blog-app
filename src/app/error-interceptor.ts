@@ -20,7 +20,6 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log("error.message", error.error.message);
         let message = "A unkow error has ocurred";
         if (error.error.message) {
           message = error.error.message;

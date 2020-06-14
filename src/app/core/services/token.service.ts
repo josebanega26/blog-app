@@ -13,7 +13,6 @@ export class TokenService {
 
   setToken(token) {
     if (token) {
-      console.log("tou are here");
       this.token = token;
       this.authStatus.next(true);
     } else {
@@ -22,7 +21,6 @@ export class TokenService {
   }
 
   saveLocalData(token: string, expirationDate: Date) {
-    console.log("expirationDate", expirationDate);
     localStorage.setItem("token", token);
     localStorage.setItem("expirationDate", expirationDate.toISOString());
   }

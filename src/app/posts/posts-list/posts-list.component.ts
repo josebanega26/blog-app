@@ -31,10 +31,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
       }
     );
     this.userAuth = this.tokenService.getIsAuth();
-    console.log("this.userAuth", this.userAuth);
-    this.tokenService.authStatus.subscribe((userIsAuth) => {
-      console.log("userIsAuth", userIsAuth);
-    });
+    this.tokenService.authStatus.subscribe((userIsAuth) => {});
     this.postService.postCount
       .pipe(distinctUntilChanged())
       .subscribe((postCount) => (this.totalPost = postCount));

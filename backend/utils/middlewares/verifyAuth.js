@@ -8,7 +8,6 @@ const verifyAuth = (req, res, next) => {
     req.userData = { email: decodedCode.email, userId: decodedCode.id };
     next();
   } catch (err) {
-    console.log(err);
     res.status(401).json({ msg: "User is not verify", err });
   }
 };

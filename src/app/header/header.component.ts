@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.userIsConnect = this.tokenService.getIsAuth();
     this.tokenService.authStatus.subscribe((state) => {
-      console.log("state HEEEEY", state);
       this.userIsConnect = state;
     });
   }

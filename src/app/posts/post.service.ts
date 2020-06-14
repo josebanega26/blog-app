@@ -77,7 +77,6 @@ export class PostService {
           this.postCount.next(postCount);
         }),
         map((postData) => {
-          console.log("postData", postData);
           return postData.posts.map((post) => {
             return {
               title: post.title,

@@ -1,12 +1,22 @@
 <header class="header">
-  <button
-    class="logo"
-    mat-icon-button
-    [routerLink]="['/post']"
-    routerLinkActive="router-link-active"
-  >
-    <img src="../../assets/images/blogLogo.png" alt="" />
-  </button>
+  <div>
+    <button
+      class="logo"
+      mat-icon-button
+      [routerLink]="['/post']"
+      routerLinkActive="router-link-active"
+    >
+      <img src="../../assets/images/blogLogo.png" alt="" />
+    </button>
+    <a
+      mat-button
+      color=""
+      [routerLink]="['/about']"
+      routerLinkActive="router-link-active"
+    >
+      About me
+    </a>
+  </div>
   <div class="link-row">
     <button
       *ngIf="!userIsConnect"

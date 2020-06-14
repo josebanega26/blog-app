@@ -88,11 +88,16 @@ export class PostService {
           });
         })
       )
-      .subscribe((posts) => {
-        this.spinner.hide();
-        this.postList = [...posts];
-        this.postsChanged.next(posts);
-      });
+      .subscribe(
+        (posts) => {
+          this.spinner.hide();
+          this.postList = [...posts];
+          this.postsChanged.next(posts);
+        },
+        (error) => {
+          this.spinner.hide();
+        }
+      );
   }
   // DELETE
   deletePost(id: string) {

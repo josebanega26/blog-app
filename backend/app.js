@@ -20,7 +20,6 @@ app.use((req, res, next) => {
   res.status(200).json({
     msg: " server it's working",
   });
-  console.log("Error handler");
 });
 
 module.exports = app;

@@ -1,13 +1,13 @@
 <header class="header">
   <div>
-    <button
+    <a
       class="logo"
       mat-icon-button
       [routerLink]="['/post']"
       routerLinkActive="router-link-active"
     >
-      <img src="../../assets/images/blogLogo.png" alt="" />
-    </button>
+      <img src="../../assets/images/blogLogo.png" alt="Blog logo" />
+    </a>
     <a
       mat-button
       color=""
@@ -18,7 +18,7 @@
     </a>
   </div>
   <div class="link-row">
-    <button
+    <a
       *ngIf="!userIsConnect"
       mat-button
       color="primary"
@@ -26,8 +26,8 @@
       routerLinkActive="router-link-active"
     >
       Timeline
-    </button>
-    <button
+    </a>
+    <a
       *ngIf="!userIsConnect"
       mat-button
       color="primary"
@@ -35,8 +35,8 @@
       routerLinkActive="router-link-active"
     >
       Login
-    </button>
-    <button
+    </a>
+    <a
       *ngIf="!userIsConnect"
       mat-button
       color="primary"
@@ -44,8 +44,8 @@
       routerLinkActive="router-link-active"
     >
       Sign up
-    </button>
-    <button
+    </a>
+    <a
       *ngIf="userIsConnect"
       mat-button
       (click)="logout()"
@@ -53,8 +53,8 @@
       routerLinkActive="router-link-active"
     >
       Logout
-    </button>
-    <button
+    </a>
+    <a
       *ngIf="userIsConnect"
       mat-button
       color="warn"
@@ -62,6 +62,6 @@
       routerLinkActive="router-link-active"
     >
       New post
-    </button>
+    </a>
   </div>
 </header>

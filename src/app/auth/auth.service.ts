@@ -68,17 +68,19 @@ export class AuthService {
 
   signUp(user: IUser) {
     this.spinner.show();
-    return this.http
-      .post(`${environment.apiUrlUser}/signup`, user)
-      .subscribe((msg) => {
+    return this.http.post(`${environment.apiUrlUser}/signup`, user).subscribe(
+      (msg) => {
         this.spinner.hide();
         this.router.navigate(["/"]);
-      });
+      },
+      (error) => {
+        this.handlerError(error);
+      }
+    );
   }
 
   handlerError(error) {
     this.spinner.hide();
-    console.error(error);
   }
 
   logout() {

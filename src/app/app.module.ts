@@ -9,10 +9,13 @@ import { LayoutComponent } from "./layout/layout.component";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { SpinnerComponent } from "./spinner/spinner.component";
 import { MaterialModule } from "@material/material.module";
-import { NotFoundComponent } from "./not-found/not-found.component";
 import { CoreModule } from "./core/core.module";
-import { AuthInterceptor } from "./auth.interceptor";
+import { AuthInterceptor } from "./auth-interceptor";
 import { MatButtonModule } from "@angular/material/button";
+import { ErrorInterceptor } from "./error-interceptor";
+import { MatDialogModule } from "@angular/material/dialog";
+import { ErrorComponent } from "./error/error/error.component";
+import { NotFoundComponent } from "./not-found/not-found.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { MatButtonModule } from "@angular/material/button";
     FooterComponent,
     LayoutComponent,
     SpinnerComponent,
+    ErrorComponent,
     NotFoundComponent,
   ],
   imports: [
@@ -31,6 +35,7 @@ import { MatButtonModule } from "@angular/material/button";
     MaterialModule,
     CoreModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   providers: [
     {
@@ -38,7 +43,14 @@ import { MatButtonModule } from "@angular/material/button";
       useClass: AuthInterceptor,
       multi: true,
     },
+    ,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent],
 })
 export class AppModule {}

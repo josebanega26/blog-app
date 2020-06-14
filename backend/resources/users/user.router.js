@@ -21,10 +21,11 @@ router.route("/signup").post(async (req, res, next) => {
         error: "",
       });
     })
-    .catch((error) => {
-      console.log("error", error);
-      res.status(500).json({
-        error: error,
+    .catch((err) => {
+      const { error } = err;
+      console.log("error", err);
+      res.status(409).json({
+        message: err.errors.email.message,
       });
     });
 });

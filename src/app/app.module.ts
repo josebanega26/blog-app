@@ -4,7 +4,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HeaderComponent } from "./header/header.component";
-import { FooterComponent } from "./footer/footer.component";
 import { LayoutComponent } from "./layout/layout.component";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { SpinnerComponent } from "./spinner/spinner.component";
@@ -16,13 +15,12 @@ import { ErrorInterceptor } from "./error-interceptor";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ErrorComponent } from "./error/error/error.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
-import { AboutMeComponent } from './about-me/about-me.component';
+import { AboutMeComponent } from "./about-me/about-me.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
     LayoutComponent,
     SpinnerComponent,
     ErrorComponent,

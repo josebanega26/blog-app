@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrlPosts: "http://localhost:3000/api/post",
-  apiUrlUser: "http://localhost:3000/api/user",
+  apiUrlPosts: "https://blog-app-joseb.herokuapp.com/api/post",
+  apiUrlUser: "https://blog-app-joseb.herokuapp.com/api/user",
 };

@@ -4,8 +4,9 @@ import { Subject } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, tap } from "rxjs/operators";
 import { SpinnerService } from "../spinner/spinner.service";
+import { environment } from "src/environments/environment";
 
-const API_URL = "http://localhost:3000";
+const API_URL = environment.apiUrlPosts;
 const POSTS_PATH = "/api/post";
 @Injectable({ providedIn: "root" })
 export class PostService {
@@ -95,6 +96,8 @@ export class PostService {
           this.postsChanged.next(posts);
         },
         (error) => {
+          console.log(error);
+
           this.spinner.hide();
         }
       );

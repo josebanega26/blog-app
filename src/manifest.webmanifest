@@ -1,9 +1,9 @@
 {
-  "name": "blog-app",
-  "short_name": "blog-app",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
-  "display": "standalone",
+  "name": "Space Blog",
+  "short_name": "Space Blog",
+  "theme_color": "#264a6d",
+  "background_color": "#264a6d",
+  "display": "fullscreen",
   "scope": "./",
   "start_url": "./",
   "icons": [

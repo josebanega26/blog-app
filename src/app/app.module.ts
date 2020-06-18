@@ -16,8 +16,8 @@ import { ErrorInterceptor } from "./error-interceptor";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ErrorComponent } from "./error/error/error.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -38,7 +38,9 @@ import { environment } from '../environments/environment';
     CoreModule,
     MatButtonModule,
     MatDialogModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register("ngsw-worker.js", {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     {

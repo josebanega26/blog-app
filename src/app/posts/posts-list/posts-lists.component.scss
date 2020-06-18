@@ -1,7 +1,14 @@
 .posts__container{
     padding-bottom: 1rem;
 }
+.bold{
+    font-weight: 500;
+}
 .image_container{
-    width: 300px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    margin-bottom: .5rem;
+    img{
+         width: 300px;
+    }
 }

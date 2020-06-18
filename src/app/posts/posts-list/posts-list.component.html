@@ -3,16 +3,15 @@
     <mat-accordion>
       <mat-expansion-panel *ngFor="let post of postsList">
         <mat-expansion-panel-header>
-          <mat-panel-title>
+          <mat-panel-title class="bold">
             {{ post.title }}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div *ngIf="post.imagePath !== '' && post.imagePath">
-          <img
-            class="image_container"
-            [src]="post.imagePath"
-            [alt]="post.title"
-          />
+        <div
+          *ngIf="post.imagePath !== '' && post.imagePath"
+          class="image_container"
+        >
+          <img [src]="post.imagePath" [alt]="post.title" />
         </div>
         <p>{{ post.body }}</p>
         <mat-action-row *ngIf="userAuth">

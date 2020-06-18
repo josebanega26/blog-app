@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { TokenService } from "../core/services/token.service";
 import { AuthService } from "@auth/auth.service";
 @Component({
@@ -7,6 +7,7 @@ import { AuthService } from "@auth/auth.service";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
+  installEvent = null;
   userIsConnect;
   constructor(private tokenService: TokenService, private auth: AuthService) {}
 
@@ -15,6 +16,18 @@ export class HeaderComponent implements OnInit {
     this.tokenService.authStatus.subscribe((state) => {
       this.userIsConnect = state;
     });
+  }
+  @HostListener("window:beforeinstallprompt", ["$event"])
+  onBeforeInstallPrompt(event: Event) {
+    event.preventDefault();
+    this.installEvent = event;
+  }
+
+  installByUser() {
+    if (this.installEvent) {
+      this.installEvent.prompt();
+      this.installEvent.userChoice().then((res) => {});
+    }
   }
 
   logout() {

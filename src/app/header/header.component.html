@@ -53,5 +53,14 @@
     >
       New post
     </button>
+    <button
+      mat-icon-button
+      color="warn"
+      aria-label="icon button with plus icon"
+      *ngIf="installEvent"
+      (click)="installByUser()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 </header>

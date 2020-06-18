@@ -4,9 +4,9 @@ import { Subject } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map, tap } from "rxjs/operators";
 import { SpinnerService } from "../spinner/spinner.service";
+import { environment } from "src/environments/environment";
 
-const API_URL = "http://localhost:3000";
-const POSTS_PATH = "/api/post";
+const API_URL = environment.apiUrlPosts;
 @Injectable({ providedIn: "root" })
 export class PostService {
   constructor(private http: HttpClient, private spinner: SpinnerService) {}
@@ -22,10 +22,7 @@ export class PostService {
     formData.append("body", body);
     formData.append("image", image, title);
     this.http
-      .post<{ message: string; postAdded: Post }>(
-        `${API_URL}${POSTS_PATH}`,
-        formData
-      )
+      .post<{ message: string; postAdded: Post }>(`${API_URL}`, formData)
       .subscribe(({ message, postAdded }) => {
         this.postList.push(postAdded);
         this.postsChanged.next(this.postList.slice());
@@ -44,7 +41,7 @@ export class PostService {
   getPostById(id) {
     this.spinner.show();
     return this.http
-      .get<{ message: string; post: any }>(`${API_URL}${POSTS_PATH}/${id}`)
+      .get<{ message: string; post: any }>(`${API_URL}/${id}`)
       .pipe(
         map(({ post }) => {
           return {
@@ -68,10 +65,9 @@ export class PostService {
       .set("currentPage", `${currentPage}`);
     this.spinner.show();
     return this.http
-      .get<{ message: string; posts: any; postCount: number }>(
-        `${API_URL}${POSTS_PATH}`,
-        { params: params }
-      )
+      .get<{ message: string; posts: any; postCount: number }>(`${API_URL}`, {
+        params: params,
+      })
       .pipe(
         tap(({ postCount }) => {
           this.postCount.next(postCount);
@@ -96,7 +92,7 @@ export class PostService {
   }
   // DELETE
   deletePost(id: string) {
-    return this.http.delete<{ id: string }>(`${API_URL}${POSTS_PATH}/${id}`);
+    return this.http.delete<{ id: string }>(`${API_URL}/${id}`);
   }
   // PUT
   updatePost(id: string, post: Post) {
@@ -115,7 +111,7 @@ export class PostService {
       };
     }
     return this.http
-      .put<{ id: string }>(`${API_URL}${POSTS_PATH}/${id}`, postData)
+      .put<{ id: string }>(`${API_URL}/${id}`, postData)
       .subscribe((message) => {});
   }
 }

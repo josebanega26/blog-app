@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrlPosts: "http://localhost:4000/api/post",
-  apiUrlUser: "http://localhost:4000/api/user",
+  apiUrlPosts: "https://space-blog-jb.herokuapp.com/api/post",
+  apiUrlUser: "https://space-blog-jb.herokuapp.com/api/user",
 };
 
 /*

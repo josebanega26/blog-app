@@ -59,10 +59,9 @@ textarea {
 }
 .image_preview{
     margin-top: 1rem;
-    width: 100%;
+    width: 300px;
     img{
         width: inherit;
-        box-shadow: 5px 5px 5px #333;
     }
 }
 input[type="file"]{

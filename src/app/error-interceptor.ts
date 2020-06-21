@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         let message = "A unkow error has ocurred";
-        if (error.error.message) {
+        if (error && error.error.message) {
           message = error.error.message;
         }
         this.matDialog.open(ErrorComponent, { data: { message } });

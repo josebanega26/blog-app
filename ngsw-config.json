@@ -33,7 +33,7 @@
       "urls": ["https://space-blog-jb.herokuapp.com/**"],
       "cacheConfig": {
         "maxSize": 2,
-        "maxAge": "1m",
+        "maxAge": "0m",
         "strategy": "performance",
         "timeout": "1s"
       }

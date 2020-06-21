@@ -32,7 +32,7 @@ speed-measure-plugin*.json
 .history/*
 #backend
 /backend/images/*
-
+/.firebase/*
 # misc
 /.sass-cache
 /connect.lock
